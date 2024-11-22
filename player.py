@@ -8,6 +8,7 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.shot_delay = 0
+        self.score = 0
     
 
     def triangle(self):
@@ -49,3 +50,13 @@ class Player(CircleShape):
         shot = Shot(self.position.x, self.position.y)
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
         self.shot_delay = PLAYER_SHOOT_COOLDOWN
+
+
+    def draw_score(self, score):
+        font = pygame.font.Font(None, 36)
+        text_surface = font.render(f"Score: {score}", True, (255, 255, 255))
+        return text_surface
+
+    def add_score(self):
+        self.score += 1
+        return self.score
